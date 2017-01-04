@@ -19,13 +19,12 @@
 #endif
 #endif
 
-WsprTx::WsprTx(DDS9851 *dds, DdsUIWidget *ddsWidget) {
+WsprTx::WsprTx(DDS9851 *dds) {
 		_dds = dds;
-		_ddsWidget = ddsWidget;
 }
 void WsprTx::sendBeacon(uint8_t band) {
 	  switch(band) {
-		  case BUTTON_BAND_160: wsprTransmitFrequency = WSPR_TX_160M; break;
+	  case BUTTON_BAND_160: wsprTransmitFrequency = WSPR_TX_160M; break;
           case BUTTON_BAND_80:  wsprTransmitFrequency = WSPR_TX_80M; break;
           case BUTTON_BAND_60:  wsprTransmitFrequency = WSPR_TX_60M; break;
           case BUTTON_BAND_40:  wsprTransmitFrequency = WSPR_TX_40M; break;
@@ -40,9 +39,7 @@ void WsprTx::sendBeacon(uint8_t band) {
 	  }
 	  wsprTransmitFrequency += DDS_OSET + random(10, 190);
 	  for (int i=0; i<162; i++) {
-		_dds->sendFrequency(wsprTransmitFrequency + WSPR_DATA[i] * 2, DDS_ENABLE);
-		_ddsWidget->setFrequency(wsprTransmitFrequency + WSPR_DATA[i] * 2);
-		_ddsWidget->updateDisplay();
+		_dds->sendFrequency(wsprTransmitFrequency + WSPR_DATA[i] * 2, DDS_ENABLE);		
         delay(682);
       }
 	  _dds->sendFrequency((wsprTransmitFrequency), DDS_DISABLE);
