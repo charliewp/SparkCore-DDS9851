@@ -2,7 +2,7 @@
   "name": "DDS9851",
   "author": "charliewp",
   "license": "GNU GPLv3",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Analog Devices DDS9851 library for the Particle Photon",
   "namespace": "AnalogDevices_DDS9851"
 }
