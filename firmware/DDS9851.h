@@ -29,22 +29,6 @@
 #define digitalPinToPort(pin) (volatile uint32_t)pin
 #define SPARK_SPI_SPEED SPI_CLOCK_DIV4
 #endif
-#include "Adafruit_mfGFX.h"
-#include "Adafruit_HX8357.h"
-#include "VnaUi.h"
-
-#define PLOT_X_WIDTH		315
-#define PLOT_Y_HEIGHT		315
-#define PLOT_MAX_Y_RANGES	3
-
-
-#define EDIT_COLOR ILI9341_GREEN
-#define EDIT_BACKGROUND ILI9341_BLACK
-#define EDIT_FONT ARIAL_12
-
-#define SMART_VFO_DIAL_DIGITAL_DX 0
-#define SMART_VFO_FONT	   SOURCECODEPRO_22
-#define SMART_VFO_DIAL_DIGITAL_CHAR_WIDTH 15
 
 #define pulseHigh(pin) {digitalWrite(pin, HIGH); digitalWrite(pin, LOW); }
  
@@ -82,45 +66,6 @@ class DDS9851 {
 
 #define WSPR_DUTY  3 // transmit every N slices.
 
-
-
-class DdsUIWidget {
-  public:
-	void attach(Adafruit_HX8357 *gfx, DDS9851 *_dds, uint16_t x_org, uint16_t y_org, uint16_t text_color, uint16_t background_color);
-	void setScan(long startFrequencyHz, long stopFrequencyHz, long stepFrequencyHz);
-	boolean isRunning();
-	void poll();
-	void updateDisplay();
-	void startScan();
-	void scanAndPlot(XyPlot *plot, long startFrequencyHz, long stopFrequencyHz, long stepFrequencyHz);
-	void scanAndPlotIt(XyPlot *plot);
-	void scanAndPlotIt(PolarPlot *plot);
-	void editFrequency(int whichFreq, char c);
-	void editScanWidth(char c);
-	long getStartFrequencyHz();
-	long getStopFrequencyHz();
-	long getStepFrequencyHz();
-	void setFrequency(long freq);
-  private:
-    Adafruit_HX8357 *_gfx;
-	DDS9851 *_dds;
-	XyPlot *_plot;
-	boolean _isRunning;
-	long _currentFrequencyHz;
-	long _lastDisplayFrequencyHz;
-	long _centerFrequencyHz;
-	long _scanWidthHz;
-	long _startFrequencyHz;
-	long _stopFrequencyHz;
-	long _stepFrequencyHz;
-	uint8_t _whichDigit;
-	char _freq[9];
-	char _lastDisplayFreq[9];
-	uint16_t _x_org;
-	uint16_t _y_org;
-	uint16_t _text_color;
-	uint16_t _background_color;
-};
 class WsprTx {
   public:
 	WsprTx(DDS9851 *dds, DdsUIWidget *ddsWidget);
