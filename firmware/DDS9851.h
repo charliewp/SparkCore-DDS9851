@@ -64,6 +64,18 @@ class DDS9851 {
 #define WSPR_TX_10M  7.040000e6
 #define WSPR_TX_6M  50.294400e6
 
+#define BUTTON_BAND_160		0
+#define BUTTON_BAND_80		1
+#define BUTTON_BAND_60		2
+#define BUTTON_BAND_40		3
+#define BUTTON_BAND_30		4
+#define BUTTON_BAND_20		5
+#define BUTTON_BAND_17		6
+#define BUTTON_BAND_15		7
+#define BUTTON_BAND_12		8
+#define BUTTON_BAND_10		9
+#define BUTTON_BAND_6		10
+
 #define WSPR_DUTY  3 // transmit every N slices.
 
 class WsprTx {
